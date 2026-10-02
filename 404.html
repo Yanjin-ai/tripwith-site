@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tripwith</title>
+<style>
+  :root{--ink:#1B2233;--muted:#66708A;--accent:#3B6FE0;--bg:#F6F7FA}
+  body{margin:0;font-family:-apple-system,system-ui,"PingFang SC",sans-serif;color:var(--ink);background:var(--bg)}
+  main{max-width:520px;margin:0 auto;padding:96px 24px;text-align:center}
+  h1{font-size:28px;margin:0 0 10px}
+  p{color:var(--muted);line-height:1.55}
+  a.btn{display:inline-block;margin-top:18px;background:var(--accent);color:#fff;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:600}
+  .alt{margin-top:14px;font-size:14px}
+  @media (prefers-color-scheme:dark){:root{--ink:#E8EBF2;--muted:#8C95AB;--bg:#12151C}}
+</style>
+</head>
+<body>
+<main>
+  <div id="join" hidden>
+    <h1>You're invited to a trip</h1>
+    <p>Open this link on your iPhone with Tripwith installed and you'll join right away.</p>
+    <a class="btn" id="open" href="#">Open in Tripwith</a>
+    <p class="alt">Don't have it yet? <a id="store" href="#">Get Tripwith on the App Store</a>, then open this link again.</p>
+    <p class="alt" lang="zh">在装了同行的 iPhone 上打开这个链接就能加入。还没装？先去 App Store 下载，再打开一次。</p>
+  </div>
+  <div id="missing" hidden>
+    <h1>Nothing here</h1>
+    <p><a href="/">Back to Tripwith</a></p>
+  </div>
+</main>
+<script>
+  // GitHub Pages 没有动态路由：/join/<token> 落到这里。装了 App 的设备根本到不了这一页——
+  // Universal Link 在浏览器加载之前就被系统拦下交给 App 了。
+  var m = location.pathname.match(/^\/join\/([A-Za-z0-9_-]+)/);
+  if (m) {
+    document.getElementById('join').hidden = false;
+    document.getElementById('open').href = 'tongxing://join/' + m[1];
+    // 还没上架，先指向首页；上架后换成 App Store 链接
+    document.getElementById('store').href = '/';
+  } else {
+    document.getElementById('missing').hidden = false;
+  }
+</script>
+</body>
+</html>

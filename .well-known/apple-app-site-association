@@ -1,0 +1,12 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["T6RJMFLYDL.com.tongxing.app"],
+        "components": [
+          { "/": "/join/*", "comment": "邀请链接" }
+        ]
+      }
+    ]
+  }
+}
